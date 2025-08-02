@@ -27,4 +27,4 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: withastro/action@v2
         with:
-          site: ./dist
+          path: ./dist

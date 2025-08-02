@@ -13,3 +13,6 @@ dist/
 
 # macOS files
 .DS_Store
+
+# Windsurf
+.windsurf/
