@@ -19,73 +19,79 @@ const { title } = Astro.props;
 </head>
 <body>
     <div class="background-gradient"></div>
-    <div id="tsparticles" class="absolute inset-0 z-0"></div>
+    <div id="tsparticles" class="tsparticles-bg"></div>
     <slot />
 
     <!-- tsparticles-slim via CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/tsparticles-slim@3.3.0/tsparticles.slim.min.js"></script>
+    <script src="https://unpkg.com/tsparticles-slim@3.3.0/tsparticles.slim.min.js"></script>
     <script>
       window.addEventListener('DOMContentLoaded', () => {
         if (window.tsParticles) {
+          console.log('tsParticles loaded, initializing...');
           window.tsParticles.load("tsparticles", {
-            fpsLimit: 60,
-            interactivity: {
-              events: {
-                onHover: {
-                  enable: true,
-                  mode: "grab",
-                },
-                resize: true,
-              },
-              modes: {
-                grab: {
-                  distance: 140,
-                  links: {
-                    opacity: 0.5,
-                  },
-                },
-              },
-            },
-            particles: {
-              color: {
-                value: "#ffffff",
-              },
-              links: {
-                color: "#ffffff",
-                distance: 150,
-                enable: true,
-                opacity: 0.2,
-                width: 1,
-              },
-              move: {
-                direction: "none",
-                enable: true,
-                outModes: {
-                  default: "bounce",
-                },
-                random: false,
-                speed: 0.5,
-                straight: false,
-              },
-              number: {
-                density: {
-                  enable: true,
-                  area: 800,
-                },
-                value: 80,
-              },
-              opacity: {
-                value: 0.2,
-              },
-              shape: {
-                type: "circle",
-              },
-              size: {
-                value: { min: 1, max: 5 },
-              },
-            },
-            detectRetina: true,
-          });
+  fpsLimit: 60,
+  interactivity: {
+    events: {
+      onHover: {
+        enable: true,
+        mode: "grab",
+      },
+      resize: true,
+    },
+    modes: {
+      grab: {
+        distance: 120,
+        links: {
+          opacity: 0.35,
+        },
+      },
+    },
+  },
+  particles: {
+    color: {
+      value: ["#dbeafe", "#38bdf8", "#818cf8", "#fff"], // blue, teal, indigo, white
+    },
+    links: {
+      color: "#38bdf8",
+      distance: 120,
+      enable: true,
+      opacity: 0.13,
+      width: 0.7,
+    },
+    move: {
+      direction: "none",
+      enable: true,
+      outModes: {
+        default: "out",
+      },
+      random: false,
+      speed: 0.25,
+      straight: false,
+    },
+    number: {
+      density: {
+        enable: true,
+        area: 1000,
+      },
+      value: 38,
+    },
+    opacity: {
+      value: 0.18,
+    },
+    shape: {
+      type: "circle",
+    },
+    size: {
+      value: { min: 1, max: 3.5 },
+    },
+    shadow: {
+      enable: true,
+      color: "#38bdf8",
+      blur: 4,
+    },
+  },
+  detectRetina: true,
+});
         }
       });
     </script>
@@ -109,22 +115,31 @@ const { title } = Astro.props;
     width: 100%;
     height: 100%;
     z-index: 0;
-    background: linear-gradient(-45deg, #010412, #0b183c, #010412, #1a0a3d);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
-  }
+    background: linear-gradient(-45deg, #0b183c 0%, #1a3c4e 35%, #0e2340 67%, #1a0a3d 100%);
+    background-size: 300% 300%;
+    animation: gradientMove 20s ease-in-out infinite;
+    opacity: 0.96;
+    filter: blur(0.5px);
+}
 
-  @keyframes gradient {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
+.tsparticles-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.main-content, slot, .slot {
+    position: relative;
+    z-index: 2;
+}
+
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 
   .animate-fade-in {
     animation: fadeIn 1s ease-in-out;
