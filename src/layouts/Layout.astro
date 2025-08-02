@@ -1,0 +1,143 @@
+---
+interface Props {
+	title: string;
+}
+const { title } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="WayFaze - A new travel companion is coming soon." />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-gradient"></div>
+    <div id="tsparticles" class="absolute inset-0 z-0"></div>
+    <slot />
+
+    <script>
+      import { tsParticles } from "tsparticles-slim";
+
+      tsParticles.load("tsparticles", {
+        fpsLimit: 60,
+        interactivity: {
+          events: {
+            onHover: {
+              enable: true,
+              mode: "grab",
+            },
+            resize: true,
+          },
+          modes: {
+            grab: {
+              distance: 140,
+              links: {
+                opacity: 0.5,
+              },
+            },
+          },
+        },
+        particles: {
+          color: {
+            value: "#ffffff",
+          },
+          links: {
+            color: "#ffffff",
+            distance: 150,
+            enable: true,
+            opacity: 0.2,
+            width: 1,
+          },
+          move: {
+            direction: "none",
+            enable: true,
+            outModes: {
+              default: "bounce",
+            },
+            random: false,
+            speed: 0.5,
+            straight: false,
+          },
+          number: {
+            density: {
+              enable: true,
+              area: 800,
+            },
+            value: 80,
+          },
+          opacity: {
+            value: 0.2,
+          },
+          shape: {
+            type: "circle",
+          },
+          size: {
+            value: { min: 1, max: 5 },
+          },
+        },
+        detectRetina: true,
+      });
+    </script>
+</body>
+</html>
+<style is:global>
+	:root {
+		color-scheme: dark;
+	}
+	html {
+		font-family: 'Poppins', sans-serif;
+	}
+	body {
+		background: #010412;
+    overflow: hidden;
+	}
+  .background-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background: linear-gradient(-45deg, #010412, #0b183c, #010412, #1a0a3d);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+  }
+
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  .animate-fade-in-delay {
+    animation: fadeIn 2s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

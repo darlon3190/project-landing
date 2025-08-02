@@ -1,0 +1,15 @@
+# Node modules
+node_modules/
+
+# Local builds
+dist/
+
+# Local env files
+.env
+.env.*.local
+
+# Vite cache
+.vite/
+
+# macOS files
+.DS_Store
