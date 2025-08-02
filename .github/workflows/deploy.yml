@@ -27,5 +27,4 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: withastro/action@v2
         with:
-          path: dist
           package-manager: npm
